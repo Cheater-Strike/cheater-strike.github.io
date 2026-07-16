@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cheater Strike 2 — Updates (Unofficial Parody)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:ital,wght@0,400;0,600;0,700;1,600;1,700;1,800&family=Saira:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<style>
+  :root{
+    /* palette sampled from counter-strike.net CSS + the banner */
+    --bg:#171a21;
+    --bg-deep:#0A0D12;
+    --panel:#23262e;
+    --panel-raised:#2a2e38;
+    --line:#3d4450;
+    --text:#dcdedf;
+    --text-dim:#8b929a;
+    --text-dimmer:#67707b;
+    --orange:#ED8E0E;
+    --orange-hi:#F5A62E;
+    --navy:#1B2632;
+    --alarm:#FF4B4B;
+    --ok:#6DC15E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{font-size:170%}
+  @media (prefers-reduced-motion: reduce){ *{animation:none!important;transition:none!important} }
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Saira',system-ui,sans-serif;
+    line-height:1.55;
+  }
+  a{color:var(--orange);text-decoration:none}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+
+  /* ── Nav bar: logo left, tabs right of it ── */
+  .topnav{
+    background:var(--bg-deep);
+    border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:20;
+  }
+  .topnav .inner{
+    max-width:68.75rem;margin:0 auto;padding:0 20px;
+    display:flex;align-items:stretch;gap:30px;height:60px;
+  }
+  .wordmark{
+    font-family:'Saira Semi Condensed',sans-serif;
+    font-style:italic;font-weight:800;text-transform:uppercase;
+    font-size:1.2rem;letter-spacing:.02em;color:#fff;line-height:1;
+    align-self:center;white-space:nowrap;
+  }
+  .wordmark .two{
+    color:transparent;-webkit-text-stroke:1.5px #fff;
+    margin-left:4px;font-size:1.4em;vertical-align:-.08em;
+  }
+  .tabs{display:flex;align-items:stretch}
+  .tab{
+    appearance:none;background:none;border:none;cursor:pointer;
+    color:var(--text-dim);font-size:.82rem;font-weight:600;
+    text-transform:uppercase;letter-spacing:.14em;
+    font-family:'Saira Semi Condensed',sans-serif;
+    padding:0 18px;position:relative;
+  }
+  .tab:hover{color:#fff}
+  .tab[aria-selected="true"]{color:#fff}
+  .tab[aria-selected="true"]::after{
+    content:"";position:absolute;left:12px;right:12px;bottom:0;height:3px;
+    background:var(--orange);
+  }
+  .parody-badge{
+    font-family:'IBM Plex Mono',monospace;font-size:.6rem;
+    color:var(--text-dimmer);border:1px solid var(--line);
+    padding:3px 7px;border-radius:3px;letter-spacing:.05em;white-space:nowrap;
+    align-self:center;margin-left:auto;
+  }
+
+  .banner{display:block;width:100%;height:auto}
+
+  /* ── Monthly Cheaters: inline in the nav bar, after the wordmark ── */
+  .navstat{
+    display:flex;align-items:baseline;gap:9px;
+    align-self:center;white-space:nowrap;
+  }
+  .navstat .stat-label{
+    font-family:'Saira Semi Condensed',sans-serif;font-weight:600;
+    text-transform:uppercase;letter-spacing:.14em;font-size:.68rem;
+    color:var(--text-dim);
+  }
+  .navstat .stat-value{
+    font-family:'Saira Semi Condensed',sans-serif;font-style:italic;font-weight:800;
+    font-size:1.3rem;line-height:1;color:var(--orange);
+    font-variant-numeric:tabular-nums;
+  }
+
+  /* ── Layout ── */
+  .col{max-width:51.25rem;margin:0 auto;padding:0 20px}
+  .panel-section{display:none;padding:44px 0 80px}
+  .panel-section.active{display:block}
+
+  h2.sec{
+    font-family:'Saira Semi Condensed',sans-serif;font-style:italic;font-weight:800;
+    text-transform:uppercase;letter-spacing:.03em;font-size:1.7rem;color:#fff;
+    padding-bottom:10px;margin-bottom:8px;
+    border-bottom:1px solid var(--line);
+  }
+  h2.sec .accent{color:var(--orange)}
+  .sec-sub{font-size:.8rem;color:var(--text-dim);margin-bottom:28px}
+
+  /* ── Update feed ── */
+  .update{padding:26px 0;border-bottom:1px solid var(--line)}
+  .update-date{
+    font-family:'Saira Semi Condensed',sans-serif;font-style:italic;font-weight:700;
+    text-transform:uppercase;color:var(--orange);font-size:1.05rem;letter-spacing:.04em;
+    margin-bottom:12px;
+  }
+  .update .tag{
+    font-family:'IBM Plex Mono',monospace;font-size:.82rem;font-weight:700;
+    color:#fff;margin:16px 0 4px;
+  }
+  .update .subtag{
+    font-family:'IBM Plex Mono',monospace;font-size:.78rem;
+    color:var(--text);margin:8px 0 2px;font-weight:700;
+  }
+  .update ul{list-style:none;font-size:.92rem;font-weight:400}
+  .update li{padding:2px 0;color:var(--text)}
+  .update li::before{content:"– ";color:var(--text-dim)}
+  .update .wordcount{
+    margin-top:16px;font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;color:var(--text-dimmer);
+  }
+
+
+  footer{
+    background:var(--bg-deep);border-top:1px solid var(--line);
+    padding:32px 0 46px;font-size:.76rem;color:var(--text-dimmer);
+  }
+  footer .zing{
+    font-family:'IBM Plex Mono',monospace;color:var(--text-dim);
+    margin-bottom:12px;font-size:.82rem;
+  }
+
+  @media (max-width:720px){
+    html{font-size:100%}
+    .topnav .inner{gap:12px}
+    .parody-badge{display:none}
+    .wordmark{font-size:1rem}
+    .navstat{gap:6px}
+    .navstat .stat-label{font-size:.56rem}
+    .navstat .stat-value{font-size:1.05rem}
+    .tab{padding:0 8px;font-size:.7rem}
+  }
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <div class="inner">
+    <span class="wordmark">Cheater Strike<span class="two">2</span></span>
+    <div class="navstat">
+      <span class="stat-label">Monthly Cheaters</span>
+      <span class="stat-value" id="cheaterCount">4,388,148</span>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Site sections">
+      <button class="tab" role="tab" aria-selected="true" data-tab="updates" id="tab-updates" aria-controls="updates">Updates</button>
+    </nav>
+    <span class="parody-badge">UNOFFICIAL PARODY</span>
+  </div>
+</div>
+
+<img class="banner" src="banner.jpg" alt="Cheater Strike 2 parody banner: two white player silhouettes on an orange field with the Cheater Strike 2 wordmark">
+
+<main class="col">
+
+  <!-- ══ TAB: UPDATES ══ -->
+  <section class="panel-section active" id="updates" role="tabpanel" aria-labelledby="tab-updates">
+    <h2 class="sec">Release <span class="accent">Notes</span></h2>
+
+    <article class="update">
+      <div class="update-date">15 JULY 2026</div>
+      <div class="update-date">Counter-Strike 2 Update</div>
+      <div class="tag">[ MAPS ]</div>
+      <ul>
+        <div class="update-header">Fachwerk</div>
+			<li>Updated to the latest version from the Community Workshop (Update Notes).</li>
+        <div class="update-header">Boulder</div>
+			<li>That's what she said</li>
+        <div class="update-header">Shelter</div>
+			<li>What he said ^</li>
+		<div class="update-header">El Dorado</div>
+			<li>He said, she said, bullshit</li>
+	  <div class="tag">[ MISC ]</div>
+      <ul>
+        <li>Top-secret various stability and security fixes.</li>
+      </ul>
+    </article>
+	
+	<article class="update">
+      <div class="update-date">10 JULY 2026</div>
+      <div class="update-date">Counter-Strike 2 Update</div>
+      <div class="tag">[ DEATHMATCH ]</div>
+      <ul>
+        <li>Bot removal is on hold pending an ethics review.</li>
+        <li>Legal has advised us to stop calling them "bots."</li>
+      </ul>
+    </article>
+	
+    <article class="update">
+      <div class="update-date">9 JULY 2026</div>
+      <div class="update-date">Counter-Strike 2 Update</div>
+      <div class="tag">[ GAMEPLAY ]</div>
+      <ul>
+        <li>Implemented a totally way cooler bomb explosion to reduce player focus on the cheating problem</li>
+      </ul>
+    </article>
+
+    <article class="update">
+      <div class="update-date">8 JULY 2026</div>
+      <div class="update-date">Counter-Strike 2 Update</div>
+      <div class="tag">[ PREMIER ]</div>
+      <ul>
+        <li>Pressed the stop button for season 4.</li>
+        <li>Pressed the start button for season 5.</li>
+        
+      </ul>
+      <div class="tag">[ MISC ]</div>
+      <ul>
+        <li>Ate lunch.</li>
+      </ul>	  
+    </article>
+
+    <article class="update">
+      <div class="update-date">30 JUN 2026</div>
+      <div class="update-date">Counter-Strike 2 Update</div>
+	  <div class="tag">[ DEATHMATCH ]</div>
+      <ul>
+        <li>Deathmatch bots now say "nice shot" to each other.</li>
+      <div class="tag">[ PREMIER ]</div>
+        <li>Fixed a bug where players were having fun in Premier.</li>
+        <li>BRB, issue came up with Deadlock</li>
+      </ul>
+      <div class="tag">[ MAPS ]</div>
+      <div class="subtag">Dust2</div>
+      <ul>
+        <li>Moved a crate 3 units to the left. Community response was mixed. Moved it back.</li>
+      </ul>
+      <div class="subtag">Mirage</div>
+      <ul>
+        <li>Fixed a pixel gap that only one man knew about. He is furious.</li>
+      </ul>
+    </article>
+
+	<article class="update">
+      <div class="update-date">24 JUNE 2026</div>
+      <div class="update-date">Counter-Strike 2 Update</div>
+      <div class="tag">[ COLOGNE 2026 MAJOR ]</div>
+      <ul>
+        <li>Congratulations to Team Falcons on winning their first major. As if Pride month wasn't going well enough already!</li>
+		  <img class="update" src="go_falcons.png" alt="RL_Falcons">
+      </ul>
+	  <div class="tag">[ MISC ]</div>
+      <ul>
+        <li>Nothing else this week. We were busy (see above).</li>
+      </ul>
+    </article>
+
+    <article class="update">
+      <div class="update-date">12 JUNE 2026</div>
+      <div class="update-date">Counter-Strike 2 Update</div>
+      <div class="tag">[ ANTI-CHEAT ]</div>
+      <ul>
+        <li>Thought about it and said fuck that.</li>
+      </ul>
+      <div class="tag">[ COMMUNITY ]</div>
+      <ul>
+        <li>We hear you.</li>
+      </ul>
+    </article>
+
+    <article class="update">
+      <div class="update-date">29 MAY 2026</div>
+      <div class="update-date">Counter-Strike 2 Update</div>
+      <div class="tag">[ ANTI-CHEAT ]</div>
+      <ul>
+        <li>A cheater was banned this week. He has been described as "unlucky" by his fourteen other accounts.</li>
+        <li>VACnet reviewed footage of a spinbotter and has asked for some time to think.</li>
+        <li>The report button now produces a more satisfying click.</li>
+      </ul>
+      <div class="tag">[ GAMEPLAY ]</div>
+      <ul>
+        <li>Fixed an exploit where communicating with your team led to teamwork.</li>
+      </ul>
+    </article>
+
+    <article class="update">
+	
+      <div class="update-date">16 MAY 2026</div>
+      <div class="update-date">Counter-Strike 2 Update</div>
+      <div class="tag">[ MAPS ]</div>
+      <div class="subtag">Ancient</div>
+      <ul>
+        <li>Added a bird. The bird is decorative.</li>
+		<li>If the music in T-spawn annoys you, chuck a HE grenade in through the window above.</li>
+		<p>		Added after we noticed players who encountered spin-botters tend to camp in spawn while waiting for the torture to end.</p>
+      </ul>
+      <div class="subtag">Vertigo</div>
+      <ul>
+        <li>Players continue to fall off the map. This is considered a feature of gravity.</li>
+      </ul>
+      <div class="subtag">Office</div>
+      <ul>
+        <li>Office remains cold.</li>
+      </ul>
+      <div class="tag">[ COMMUNITY ]</div>
+      <ul>
+        <li>We hear you.</li>
+      </ul>
+    </article>
+
+    <article class="update">
+	<div class="update-date">2 MAY 2026</div>
+      <div class="update-date">Counter-Strike 2 Update</div>
+      <div class="tag">[ MISC ]</div>
+      <ul>
+        <li>Fixed a typo in a file nobody reads. It reads better now, to nobody.</li>
+        <li>Recompiled the game. It felt right.</li>
+      </ul>
+      <div class="tag">[ COMMUNITY ]</div>
+      <ul>
+        <li>We hear you.</li>
+      </ul>
+    </article>
+  </section>
+
+</main>
+
+<footer>
+  <div class="col">
+    <p class="zing">This website received more updates this week than Counter-Strike.</p>
+    <p>Unofficial fan parody. Not affiliated with, endorsed by, or acknowledged by Valve Corporation.
+    Counter-Strike is a trademark of its respective owner. All patch notes on this page are fictional.
+    No sentient bots were harmed in the making of this website. They asked us to tell you they're fine.</p>
+  </div>
+</footer>
+
+<script>
+  /* ── Tabs: show only the selected panel ── */
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.panel-section');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.setAttribute('aria-selected', t === tab ? 'true' : 'false'));
+      panels.forEach(p => p.classList.toggle('active', p.id === tab.dataset.tab));
+    });
+  });
+
+  /* ── Monthly Cheaters: slow live counter ── */
+  const BASE_CHEATERS = 4388148;
+  const EPOCH = new Date('2026-07-01T00:00:00Z').getTime(); // resets monthly, in spirit
+  const el = document.getElementById('cheaterCount');
+  function updateCheaters(){
+    // roughly one new cheater every 7 seconds — plausible and quietly horrifying
+    const extra = Math.floor((Date.now() - EPOCH) / 7000) % 400000;
+    el.textContent = (BASE_CHEATERS + extra).toLocaleString();
+  }
+  updateCheaters();
+  setInterval(updateCheaters, 7000);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cheater Strike 2 — Updates (Unofficial Parody)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:ital,wght@0,400;0,600;0,700;1,600;1,700;1,800&family=Saira:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<style>
+  :root{
+    /* palette sampled from counter-strike.net CSS + the banner */
+    --bg:#171a21;
+    --bg-deep:#0A0D12;
+    --panel:#23262e;
+    --panel-raised:#2a2e38;
+    --line:#3d4450;
+    --text:#dcdedf;
+    --text-dim:#8b929a;
+    --text-dimmer:#67707b;
+    --orange:#ED8E0E;
+    --orange-hi:#F5A62E;
+    --navy:#1B2632;
+    --alarm:#FF4B4B;
+    --ok:#6DC15E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{font-size:170%}
+  @media (prefers-reduced-motion: reduce){ *{animation:none!important;transition:none!important} }
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Saira',system-ui,sans-serif;
+    line-height:1.55;
+  }
+  a{color:var(--orange);text-decoration:none}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+
+  /* ── Nav bar: logo left, tabs right of it ── */
+  .topnav{
+    background:var(--bg-deep);
+    border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:20;
+  }
+  .topnav .inner{
+    max-width:68.75rem;margin:0 auto;padding:0 20px;
+    display:flex;align-items:stretch;gap:30px;height:60px;
+  }
+  .wordmark{
+    font-family:'Saira Semi Condensed',sans-serif;
+    font-style:italic;font-weight:800;text-transform:uppercase;
+    font-size:1.2rem;letter-spacing:.02em;color:#fff;line-height:1;
+    align-self:center;white-space:nowrap;
+  }
+  .wordmark .two{
+    color:transparent;-webkit-text-stroke:1.5px #fff;
+    margin-left:4px;font-size:1.4em;vertical-align:-.08em;
+  }
+  .tabs{display:flex;align-items:stretch}
+  .tab{
+    appearance:none;background:none;border:none;cursor:pointer;
+    color:var(--text-dim);font-size:.82rem;font-weight:600;
+    text-transform:uppercase;letter-spacing:.14em;
+    font-family:'Saira Semi Condensed',sans-serif;
+    padding:0 18px;position:relative;
+  }
+  .tab:hover{color:#fff}
+  .tab[aria-selected="true"]{color:#fff}
+  .tab[aria-selected="true"]::after{
+    content:"";position:absolute;left:12px;right:12px;bottom:0;height:3px;
+    background:var(--orange);
+  }
+  .parody-badge{
+    font-family:'IBM Plex Mono',monospace;font-size:.6rem;
+    color:var(--text-dimmer);border:1px solid var(--line);
+    padding:3px 7px;border-radius:3px;letter-spacing:.05em;white-space:nowrap;
+    align-self:center;margin-left:auto;
+  }
+
+  .banner{display:block;width:100%;height:auto}
+
+  /* ── Monthly Cheaters: inline in the nav bar, after the wordmark ── */
+  .navstat{
+    display:flex;align-items:baseline;gap:9px;
+    align-self:center;white-space:nowrap;
+  }
+  .navstat .stat-label{
+    font-family:'Saira Semi Condensed',sans-serif;font-weight:600;
+    text-transform:uppercase;letter-spacing:.14em;font-size:.68rem;
+    color:var(--text-dim);
+  }
+  .navstat .stat-value{
+    font-family:'Saira Semi Condensed',sans-serif;font-style:italic;font-weight:800;
+    font-size:1.3rem;line-height:1;color:var(--orange);
+    font-variant-numeric:tabular-nums;
+  }
+
+  /* ── Layout ── */
+  .col{max-width:51.25rem;margin:0 auto;padding:0 20px}
+  
+  /* ── 404 Specific Styles ── */
+  .error-wrapper {
+    text-align: center;
+    padding: 80px 20px 100px;
+    min-height: 55vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .error-title {
+    font-family: 'Saira Semi Condensed', sans-serif;
+    font-style: italic;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 2.2rem;
+    color: var(--alarm);
+    margin-bottom: 15px;
+    letter-spacing: 0.02em;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+  }
+  .error-desc {
+    max-width: 500px;
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    margin-bottom: 40px;
+  }
+  
+  /* Fake Loading Bar */
+  .fake-loader-container {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 50px;
+    text-align: left;
+  }
+  .fake-loader-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+    min-height: 1.2rem; /* prevents layout shift */
+  }
+  .fake-loader-bar {
+    background: var(--bg-deep);
+    border: 1px solid var(--line);
+    height: 14px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .fake-loader-fill {
+    height: 100%;
+    background: var(--orange);
+    width: 0%;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-spawn {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--bg-deep);
+    background-color: var(--orange);
+    padding: 12px 28px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+  }
+  .btn-spawn:hover {
+    background-color: var(--orange-hi);
+    color: var(--bg-deep);
+    transform: translateY(-2px);
+  }
+  .btn-spawn:active {
+    transform: translateY(0);
+  }
+
+  footer{
+    background:var(--bg-deep);border-top:1px solid var(--line);
+    padding:32px 0 46px;font-size:.76rem;color:var(--text-dimmer);
+  }
+  footer .zing{
+    font-family:'IBM Plex Mono',monospace;color:var(--text-dim);
+    margin-bottom:12px;font-size:.82rem;
+  }
+
+  @media (max-width:720px){
+    html{font-size:100%}
+    .topnav .inner{gap:12px}
+    .parody-badge{display:none}
+    .wordmark{font-size:1rem}
+    .navstat{gap:6px}
+    .navstat .stat-label{font-size:.56rem}
+    .navstat .stat-value{font-size:1.05rem}
+    .tab{padding:0 8px;font-size:.7rem}
+    .error-title{font-size:1.6rem}
+  }
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <div class="inner">
+    <span class="wordmark">Cheater Strike<span class="two">2</span></span>
+    <div class="navstat">
+      <span class="stat-label">Monthly Cheaters</span>
+      <span class="stat-value" id="cheaterCount">4,388,148</span>
+    </div>
+    <span class="parody-badge">UNOFFICIAL PARODY</span>
+  </div>
+</div>
+
+<img class="banner" src="banner.jpg" alt="Cheater Strike 2 parody banner">
+
+<!-- Special 404 Content -->
+<main class="error-wrapper">
+  <h1 class="error-title">404: Smoke and Mirrors.</h1>
+  <p class="error-desc">
+    You actually clicked the link? Look, we usually just assume you read the headline and immediately go complain on Reddit. We only built the front-end of this joke. Stare at this screen while we pretend to fetch data from a server we never bought.
+  </p>
+
+  <div class="fake-loader-container">
+    <div class="fake-loader-text" id="loaderText">Initializing fake connection...</div>
+    <div class="fake-loader-bar">
+      <div class="fake-loader-fill" id="loaderFill"></div>
+    </div>
+  </div>
+
+  <a href="/" class="btn-spawn">Return to Spawn</a>
+</main>
+
+<footer>
+  <div class="col">
+    <p class="zing">This website received more updates this week than Counter-Strike.</p>
+    <p>Unofficial fan parody. Not affiliated with, endorsed by, or acknowledged by Valve Corporation.
+    Counter-Strike is a trademark of its respective owner. All patch notes on this page are fictional.
+    No sentient bots were harmed in the making of this website. They asked us to tell you they're fine.</p>
+  </div>
+</footer>
+
+<script>
+  /* ── Monthly Cheaters: slow live counter ── */
+  const BASE_CHEATERS = 4388148;
+  const EPOCH = new Date('2026-07-01T00:00:00Z').getTime();
+  const el = document.getElementById('cheaterCount');
+  function updateCheaters(){
+    const extra = Math.floor((Date.now() - EPOCH) / 7000) % 400000;
+    el.textContent = (BASE_CHEATERS + extra).toLocaleString();
+  }
+  updateCheaters();
+  setInterval(updateCheaters, 7000);
+
+  /* ── Fake Loading Bar Logic ── */
+  const fill = document.getElementById('loaderFill');
+  const text = document.getElementById('loaderText');
+  let progress = 0;
+
+  function simulateLoading() {
+    if (progress >= 99) {
+      // Hard stall forever at 99%
+      text.textContent = `Server hamster stopped spinning. Hanging indefinitely... 99.0%`;
+      return; 
+    }
+
+    // Determine random increment
+    let increment = Math.random() * 12 + 2; 
+    
+    // As progress gets higher, slow down the increments drastically
+    if (progress > 60) increment = Math.random() * 5 + 1;
+    if (progress > 85) increment = Math.random() * 1.5 + 0.1;
+    if (progress > 95) increment = Math.random() * 0.4 + 0.05;
+
+    progress += increment;
+    if (progress > 99) progress = 99; // Cap at 99%
+
+    // Update DOM
+    fill.style.width = `${progress}%`;
+
+    // Funny status messages based on current fake progress
+    let status = "Fetching non-existent content...";
+    if (progress > 25) status = "Downloading empty JSON file...";
+    if (progress > 50) status = "Realizing there is no backend...";
+    if (progress > 75) status = "Pretending to try really hard...";
+    if (progress > 90) status = "Stalling to make it look believable...";
+
+    text.textContent = `${status} ${progress.toFixed(1)}%`;
+
+    // Random stuttery delay for the next chunk
+    let nextTick = Math.random() * 800 + 200;
+    if (progress > 80) nextTick = Math.random() * 1500 + 500;
+    if (progress > 95) nextTick = Math.random() * 3000 + 1000; // Agonizingly slow at the end
+
+    setTimeout(simulateLoading, nextTick);
+  }
+
+  // Kick off the fake loader a second after the page loads
+  setTimeout(simulateLoading, 1000);
+</script>
+
+</body>
+</html>
