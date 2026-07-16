@@ -30,13 +30,15 @@
     --ok:#6DC15E;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{font-size:170%}
+  html{font-size:135%}
   @media (prefers-reduced-motion: reduce){ *{animation:none!important;transition:none!important} }
   body{
     background:var(--bg);
     color:var(--text);
     font-family:'Saira',system-ui,sans-serif;
     line-height:1.55;
+    /* keeps content clear of the fixed bottom banner */
+    padding-bottom:180px;
   }
   a{color:var(--orange);text-decoration:none}
   a:focus-visible,button:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
@@ -82,7 +84,7 @@
     align-self:center;margin-left:auto;
   }
 
-  .banner{display:block;width:100%;height:500}
+  .banner{display:block;width:100%;height:auto}
 
   /* ── Monthly Cheaters: inline in the nav bar, after the wordmark ── */
   .navstat{
@@ -148,7 +150,8 @@
   }
 
   @media (max-width:720px){
-    html{font-size:100%}
+    html{font-size:92%}
+    body{padding-bottom:120px}
     .topnav .inner{gap:12px}
     .parody-badge{display:none}
     .wordmark{font-size:1rem}
