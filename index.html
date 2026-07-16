@@ -37,7 +37,7 @@
     color:var(--text);
     font-family:'Saira',system-ui,sans-serif;
     line-height:1.55;
-    /* fallback clearance; JS measures the real banner height on load */
+    /* keeps content clear of the fixed bottom banner */
     padding-bottom:180px;
   }
   a{color:var(--orange);text-decoration:none}
@@ -85,14 +85,6 @@
   }
 
   .banner{display:block;width:100%;height:auto}
-
-  /* ── Persistent bottom banner: same edge-to-edge behaviour as .banner ── */
-  .banner-fixed{
-    position:fixed;bottom:0;left:0;right:0;z-index:9999;
-    background:#121822;
-    line-height:0; /* kills the inline-image descender gap */
-  }
-  .banner-fixed img{display:block;width:100%;height:auto}
 
   /* ── Monthly Cheaters: inline in the nav bar, after the wordmark ── */
   .navstat{
@@ -171,9 +163,9 @@
 </style>
 </head>
 <body>
-<div class="banner-fixed">
+<div style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #121822; text-align: center; z-index: 9999; padding: 10px 0;">
     <a href="https://cheater-strike.net">
-        <img src="word-ad-banner.png" alt="Word.exe Performance Boost">
+        <img src="word-ad-banner.png" alt="Word.exe Performance Boost" style="max-width: 100%; max-height: 150px; height: auto; display: inline-block;">
     </a>
 </div>
 
@@ -368,15 +360,6 @@
 </footer>
 
 <script>
-  /* ── Keep content clear of the fixed banner, whatever height it renders at ── */
-  const fixedBanner = document.querySelector('.banner-fixed');
-  function syncBannerSpace(){
-    document.body.style.paddingBottom = fixedBanner.offsetHeight + 'px';
-  }
-  syncBannerSpace();
-  window.addEventListener('resize', syncBannerSpace);
-  fixedBanner.querySelector('img').addEventListener('load', syncBannerSpace);
-
   /* ── Tabs: show only the selected panel ── */
   const tabs = document.querySelectorAll('.tab');
   const panels = document.querySelectorAll('.panel-section');
