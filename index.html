@@ -163,11 +163,33 @@
 </style>
 </head>
 <body>
-<div style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #121822; text-align: center; z-index: 9999; padding: 10px 0;">
-    <a href="https://cheater-strike.net/word">
-        <img src="word-ad-banner.png" alt="Word.exe Performance Boost" style="max-width: 100%; max-height: 150px; height: auto; display: inline-block;">
-    </a>
+<div id="ad-rail" style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #121822; text-align: center; z-index: 9999; padding: 10px 0;">
+    <div style="position: relative; width: 100%; height: 150px;">
+        <a class="ad-slide" href="https://cheater-strike.net/word"
+           style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; opacity:1; transition:opacity 1s ease-in-out;">
+            <img src="word-ad-banner.png" alt="Word.exe Performance Boost" style="max-width:100%; max-height:150px; height:auto;">
+        </a>
+        <a class="ad-slide" href="https://cheater-strike.net/vaccine"
+           style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 1s ease-in-out;">
+            <img src="BM_vaccine_ad_banner.png" alt="BM Vaccine" style="max-width:100%; max-height:150px; height:auto;">
+        </a>
+    </div>
 </div>
+<script>
+  /* ── Ad banner rotator: crossfade every 8s ── */
+  (function () {
+    var slides = document.querySelectorAll('#ad-rail .ad-slide');
+    if (slides.length < 2) return;
+    var i = 0;
+    setInterval(function () {
+      slides[i].style.opacity = '0';
+      slides[i].style.pointerEvents = 'none';
+      i = (i + 1) % slides.length;
+      slides[i].style.opacity = '1';
+      slides[i].style.pointerEvents = 'auto';
+    }, 8000);
+  })();
+</script>
 
 
 <div class="topnav">
@@ -353,9 +375,11 @@
 <footer>
   <div class="col">
     <p class="zing">This website received more updates this week than Counter-Strike.</p>
-    <p>Unofficial fan parody. Not affiliated with, endorsed by, or acknowledged by Valve Corporation.
-    Counter-Strike is a trademark of its respective owner. All patch notes on this page are fictional.
+    <p>Unofficial fan parody. Not affiliated with, endorsed by, or acknowledged by Valve Corporation. Counter-Strike and Counter-Strike 2 are trademarks of Valve Corporation. All patch notes and ad banners on this page are fictional.
+Any imagery evoking or referencing Counter-Strike is used for the purpose of parody and commentary. All related trademarks, logos, characters, maps, and visual assets remain the property of Valve Corporation.
+Other images and media on this site remain the property of their respective owners and are used here for illustrative or parody purposes only. If you own any material used here and would like it credited or removed, please contact cheater-strike@hotmail.com
     No sentient bots were harmed in the making of this website.</p>
+	
   </div>
 </footer>
 
