@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cheater Strike 2 — Updates (Unofficial Parody)</title>
+<title>Cheater Strike 2 — News &amp; Updates (Unofficial Parody)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:ital,wght@0,400;0,600;0,700;1,600;1,700;1,800&family=Saira:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
@@ -139,6 +139,56 @@
     font-size:.72rem;color:var(--text-dimmer);
   }
 
+  /* ── News feed: article briefs ── */
+  .news-brief{
+    display:flex;gap:22px;align-items:flex-start;
+    padding:26px 0;border-bottom:1px solid var(--line);
+  }
+  .news-thumb{
+    flex:0 0 240px;display:block;position:relative;
+    aspect-ratio:16/10;overflow:hidden;
+    background:var(--panel);border:1px solid var(--line);
+  }
+  .news-thumb::after{
+    /* deadpan fallback shown behind the image if it fails to load */
+    content:"[ IMAGE PENDING LEGAL ]";
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.05em;
+    color:var(--text-dimmer);text-align:center;padding:0 12px;
+  }
+  .news-thumb img{
+    position:relative;z-index:1;
+    width:100%;height:100%;object-fit:contain;background:var(--bg-deep);display:block;
+    transition:transform .35s ease;
+  }
+  .news-brief:hover .news-thumb img{transform:scale(1.05)}
+
+  .news-body{flex:1;min-width:0}
+  .news-meta{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.05em;
+    color:var(--text-dimmer);margin-bottom:8px;text-transform:uppercase;
+  }
+  .news-meta .live{color:var(--orange);font-weight:700}
+  .news-headline{
+    font-family:'Saira Semi Condensed',sans-serif;font-style:italic;font-weight:800;
+    text-transform:uppercase;letter-spacing:.01em;line-height:1.05;
+    font-size:1.5rem;margin-bottom:10px;
+  }
+  .news-headline a{color:#fff}
+  .news-headline a:hover{color:var(--orange)}
+  .news-excerpt{font-size:.95rem;color:var(--text);margin-bottom:12px}
+  .news-more{
+    font-family:'IBM Plex Mono',monospace;font-size:.78rem;font-weight:700;
+    color:var(--orange);letter-spacing:.03em;
+  }
+  .news-more:hover{color:var(--orange-hi)}
+
+  @media (max-width:560px){
+    .news-brief{flex-direction:column;gap:14px}
+    .news-thumb{flex-basis:auto;width:100%}
+    .news-headline{font-size:1.3rem}
+  }
+
 
   footer{
     background:var(--bg-deep);border-top:1px solid var(--line);
@@ -200,7 +250,8 @@
       <span class="stat-value" id="cheaterCount">4,388,148</span>
     </div>
     <nav class="tabs" role="tablist" aria-label="Site sections">
-      <button class="tab" role="tab" aria-selected="true" data-tab="updates" id="tab-updates" aria-controls="updates">Updates</button>
+      <button class="tab" role="tab" aria-selected="true" data-tab="news" id="tab-news" aria-controls="news">News</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="updates" id="tab-updates" aria-controls="updates">Updates</button>
     </nav>
     <span class="parody-badge">UNOFFICIAL PARODY</span>
   </div>
@@ -210,8 +261,29 @@
 
 <main class="col">
 
+  <!-- ══ TAB: NEWS ══ -->
+  <section class="panel-section active" id="news" role="tabpanel" aria-labelledby="tab-news">
+    <h2 class="sec">Latest <span class="accent">News</span></h2>
+
+    <article class="news-brief">
+      <!-- Clicking the image opens the full article -->
+      <a class="news-thumb" href="news-ceiling-cat.html"
+         aria-label="Read full article: Valve Hires Ceiling Cat in Desperate Bid to Eradicate Cheating">
+        <img src="ceiling_cat_ad_banner.png"
+             alt="Ceiling Cat watching over the Cheater Strike 2 servers"
+             onerror="this.style.display='none'">
+      </a>
+      <div class="news-body">
+        <!-- Clicking the headline opens the full article -->
+        <h3 class="news-headline">
+          <a href="news-ceiling-cat.html">Valve Hires CEILING CAT in Desperate Bid to Eradicate Cheating</a>
+        </h3>
+      </div>
+    </article>
+  </section>
+
   <!-- ══ TAB: UPDATES ══ -->
-  <section class="panel-section active" id="updates" role="tabpanel" aria-labelledby="tab-updates">
+  <section class="panel-section" id="updates" role="tabpanel" aria-labelledby="tab-updates">
     <h2 class="sec">Release <span class="accent">Notes</span></h2>
 
     <article class="update">
@@ -375,7 +447,7 @@
 <footer>
   <div class="col">
     <p class="zing">This website received more updates this week than Counter-Strike.</p>
-    <p>Unofficial fan parody. Not affiliated with, endorsed by, or acknowledged by Valve Corporation. Counter-Strike and Counter-Strike 2 are trademarks of Valve. <br>All patch notes and ad banners on this page are fictional. <br>No sentient bots were harmed in the making of this website.
+    <p>Unofficial fan parody. Not affiliated with, endorsed by, or acknowledged by Valve Corporation. Counter-Strike and Counter-Strike 2 are trademarks of Valve. <br>All articles, patch notes, and ad banners on this site are fictional. <br>No sentient bots were harmed in the making of this website.
 <br>Any imagery evoking or referencing Counter-Strike is used for the purpose of parody and commentary. All related trademarks, logos, characters, maps, and visual assets remain the property of Valve.<br>
 Other images and media on this site remain the property of their respective owners and are used here for illustrative or parody purposes only. <br>If necessary contact cheater-strike@hotmail.com
     </p>
@@ -387,12 +459,20 @@ Other images and media on this site remain the property of their respective owne
   /* ── Tabs: show only the selected panel ── */
   const tabs = document.querySelectorAll('.tab');
   const panels = document.querySelectorAll('.panel-section');
+  function activateTab(name){
+    const target = [...tabs].find(t => t.dataset.tab === name);
+    if(!target) return;
+    tabs.forEach(t => t.setAttribute('aria-selected', t === target ? 'true' : 'false'));
+    panels.forEach(p => p.classList.toggle('active', p.id === name));
+  }
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      tabs.forEach(t => t.setAttribute('aria-selected', t === tab ? 'true' : 'false'));
-      panels.forEach(p => p.classList.toggle('active', p.id === tab.dataset.tab));
+      activateTab(tab.dataset.tab);
+      history.replaceState(null, '', '#' + tab.dataset.tab);
     });
   });
+  // Honor a #news / #updates hash on load (e.g. links back from an article page)
+  if(location.hash){ activateTab(location.hash.slice(1)); }
 
   /* ── Monthly Cheaters: slow live counter ── */
   const BASE_CHEATERS = 4388148;
