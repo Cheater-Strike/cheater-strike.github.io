@@ -43,25 +43,27 @@
   a{color:var(--orange);text-decoration:none}
   a:focus-visible,button:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
 
-  /* ── Nav bar: logo left, tabs right of it ── */
+  /* ── Hero: banner image with the nav overlaid on top of it ── */
+  .hero{position:relative}
+
+  /* ── Nav bar: logo left, tabs right of it — overlaid on the banner ── */
   .topnav{
-    background:var(--bg-deep);
-    border-bottom:1px solid var(--line);
-    position:sticky;top:0;z-index:20;
+    position:absolute;top:0;left:0;right:0;z-index:20;
+    /* dark scrim so the wordmark, stat and tabs stay legible over the art */
+    background:linear-gradient(to bottom,
+      rgba(10,13,18,.88) 0%,
+      rgba(10,13,18,.55) 55%,
+      rgba(10,13,18,0) 100%);
   }
   .topnav .inner{
     max-width:68.75rem;margin:0 auto;padding:0 20px;
     display:flex;align-items:stretch;gap:30px;height:60px;
   }
-  .wordmark{
-    font-family:'Saira Semi Condensed',sans-serif;
-    font-style:italic;font-weight:800;text-transform:uppercase;
-    font-size:1.2rem;letter-spacing:.02em;color:#fff;line-height:1;
-    align-self:center;white-space:nowrap;
+  .home-logo{
+    align-self:center;display:flex;align-items:center;flex:0 0 auto;
   }
-  .wordmark .two{
-    color:transparent;-webkit-text-stroke:1.5px #fff;
-    margin-left:4px;font-size:1.4em;vertical-align:-.08em;
+  .home-logo img{
+    width:90px;height:60px;display:block;object-fit:contain;
   }
   .tabs{display:flex;align-items:stretch}
   .tab{
@@ -92,9 +94,9 @@
     align-self:center;white-space:nowrap;
   }
   .navstat .stat-label{
-    font-family:'Saira Semi Condensed',sans-serif;font-weight:600;
-    text-transform:uppercase;letter-spacing:.14em;font-size:.68rem;
-    color:var(--text-dim);
+    font-family:'Saira Semi Condensed',sans-serif;font-weight:700;
+    text-transform:uppercase;letter-spacing:.06em;font-size:1.3rem;line-height:1;
+    color:#fff;
   }
   .navstat .stat-value{
     font-family:'Saira Semi Condensed',sans-serif;font-style:italic;font-weight:800;
@@ -206,7 +208,7 @@
     .parody-badge{display:none}
     .wordmark{font-size:1rem}
     .navstat{gap:6px}
-    .navstat .stat-label{font-size:.56rem}
+    .navstat .stat-label{font-size:1.05rem}
     .navstat .stat-value{font-size:1.05rem}
     .tab{padding:0 8px;font-size:.7rem}
   }
@@ -247,22 +249,25 @@
 </script>
 
 
-<div class="topnav">
-  <div class="inner">
-    <span class="wordmark">Cheater Strike<span class="two">2</span></span>
-    <div class="navstat">
-      <span class="stat-label">Monthly Cheaters</span>
-      <span class="stat-value" id="cheaterCount">4,388,148</span>
+<div class="hero">
+  <img class="banner" src="banner.jpg" alt="Cheater Strike 2 parody banner: two white player silhouettes on an orange field with the Cheater Strike 2 wordmark">
+  <div class="topnav">
+    <div class="inner">
+      <a class="home-logo" href="https://cheater-strike.net" aria-label="Back to Cheater Strike 2 home">
+        <img src="logo_home_90x60.png" alt="Cheater Strike 2 home" width="90" height="60">
+      </a>
+      <div class="navstat">
+        <span class="stat-label">Monthly Cheaters</span>
+        <span class="stat-value" id="cheaterCount">4,388,148</span>
+      </div>
+      <nav class="tabs" role="tablist" aria-label="Site sections">
+        <button class="tab" role="tab" aria-selected="true" data-tab="news" id="tab-news" aria-controls="news">News</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="updates" id="tab-updates" aria-controls="updates">Updates</button>
+      </nav>
+      <span class="parody-badge">UNOFFICIAL PARODY</span>
     </div>
-    <nav class="tabs" role="tablist" aria-label="Site sections">
-      <button class="tab" role="tab" aria-selected="true" data-tab="news" id="tab-news" aria-controls="news">News</button>
-      <button class="tab" role="tab" aria-selected="false" data-tab="updates" id="tab-updates" aria-controls="updates">Updates</button>
-    </nav>
-    <span class="parody-badge">UNOFFICIAL PARODY</span>
   </div>
 </div>
-
-<img class="banner" src="banner.jpg" alt="Cheater Strike 2 parody banner: two white player silhouettes on an orange field with the Cheater Strike 2 wordmark">
 
 <main class="col">
 
